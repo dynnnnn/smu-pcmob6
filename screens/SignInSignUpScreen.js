@@ -1,20 +1,33 @@
+import React, { useState } from "react";
+import {
+  Platform,
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  UIManager,
+  ActivityIndicator,
+  Keyboard,
+  LayoutAnimation
+} from "react-native";
+import { API, API_LOGIN } from "../constants/API";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 
-import React, { useState } from 'react';
-import { Platform, StyleSheet, View, Text, TextInput, TouchableOpacity, UIManager, ActivityIndicator, Keyboard } from 'react-native';
-import { API, API_LOGIN } from '../constants/API';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
-
-if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
+if (
+  Platform.OS === "android" &&
+  UIManager.setLayoutAnimationEnabledExperimental
+) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
 } //Needs to be manually enabled for android
 
 export default function SignInSignUpScreen({ navigation }) {
-
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [errorText, setErrorText] = useState('')
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errorText, setErrorText] = useState("");
+  const [isLogIn, setIsLogIn] = useState(true);
 
   async function login() {
     console.log("---- Login time ----");
@@ -38,8 +51,8 @@ export default function SignInSignUpScreen({ navigation }) {
       console.log("Error logging in!");
       console.log(error);
       setErrorText(error.response.data.description);
-      if (error.response.status = 404) {
-        setErrorText("User does not exist")
+      if ((error.response.status = 404)) {
+        setErrorText("User does not exist");
       }
     }
   }
@@ -47,7 +60,7 @@ export default function SignInSignUpScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
-        Log In
+        {isLogIn ? "Log In" : "Sign up"}
       </Text>
       <View style={styles.inputView}>
         <TextInput
@@ -58,7 +71,7 @@ export default function SignInSignUpScreen({ navigation }) {
           onChangeText={(username) => setUsername(username)}
         />
       </View>
-  
+
       <View style={styles.inputView}>
         <TextInput
           style={styles.textInput}
@@ -69,18 +82,53 @@ export default function SignInSignUpScreen({ navigation }) {
           onChangeText={(pw) => setPassword(pw)}
         />
       </View>
-      <View/>
+      <View />
+      {isLogIn ? (
+        <View />
+      ) : (
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.textInput}
+            placeholder="Confirm Password:"
+            placeholderTextColor="#003f5c"
+            secureTextEntry={true}
+            onChangeText={(pw) => setConfirmPassword(pw)}
+          />
+        </View>
+      )}
       <View>
-        <View style={{flexDirection: "row"}}>
+        <View style={{ flexDirection: "row" }}>
           <TouchableOpacity style={styles.button} onPress={login}>
-            <Text style={styles.buttonText}> Log In </Text>
+            <Text style={styles.buttonText}>
+              {isLogIn ? "Log In" : "Sign up"}{" "}
+            </Text>
           </TouchableOpacity>
-          {loading ? <ActivityIndicator style={{ marginLeft: 10 }}/> : <View/>}
+          {loading ? (
+            <ActivityIndicator style={{ marginLeft: 10 }} />
+          ) : (
+            <View />
+          )}
         </View>
       </View>
-      <Text style={styles.errorText}>
-        {errorText}
-      </Text>
+      <Text style={styles.errorText}>{errorText}</Text>
+      <TouchableOpacity
+        onPress={() => {
+          LayoutAnimation.configureNext({
+            duration: 700,
+            create: { type: 'linear', property: 'opacity' },
+            update: { type: 'spring', springDamping: 0.4 }
+          });
+          setIsLogIn(!isLogIn);
+          setErrorText("");
+        }}
+      >
+        <Text style={styles.switchText}>
+          {" "}
+          {isLogIn
+            ? "No account? Sign up now."
+            : "Already have an account? Log in here."}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -88,19 +136,19 @@ export default function SignInSignUpScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
-    fontWeight: 'bold',
-    fontSize: 40, 
-    margin: 20
+    fontWeight: "bold",
+    fontSize: 40,
+    margin: 20,
   },
   switchText: {
-    fontWeight: '400',
-    fontSize: 20, 
-    marginTop: 20
+    fontWeight: "400",
+    fontSize: 20,
+    marginTop: 20,
   },
   inputView: {
     backgroundColor: "#FFC0CB",
@@ -116,18 +164,18 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: "blue",
     borderRadius: 25,
   },
   buttonText: {
-    fontWeight: '400',
-    fontSize: 20, 
+    fontWeight: "400",
+    fontSize: 20,
     margin: 20,
-    color: 'white'
+    color: "white",
   },
   errorText: {
     fontSize: 15,
-    color: 'red',
-    marginTop: 20
-  }
+    color: "red",
+    marginTop: 20,
+  },
 });

@@ -7,6 +7,8 @@ import { lightStyles } from '../styles/commonStyles';
 const Stack = createStackNavigator();
 
 export default function AccountStack() {
+    const styles = lightStyles
+return(
     <Stack.Navigator>
     <Stack.Screen component={AccountScreen} name="Account" options={{
         title: "Your Account",
@@ -21,5 +23,6 @@ export default function AccountStack() {
         headerTintColor: styles.headerTint
       }}/>
   </Stack.Navigator>
+)
   
 }

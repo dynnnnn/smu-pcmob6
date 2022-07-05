@@ -1,6 +1,6 @@
 export const commonStyles = {
   button: {
-    backgroundColor: '#2069e0',
+    backgroundColor: 'black',
     borderRadius: 15,
     width: "50%",
     alignItems: "center"

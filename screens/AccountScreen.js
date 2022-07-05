@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ActivityIndicator, Text, View } from "react-native";
+import { ActivityIndicator, Text, View, TouchableOpacity } from "react-native";
 import { commonStyles, lightStyles } from "../styles/commonStyles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
@@ -58,9 +58,15 @@ export default function AccountScreen({ navigation }) {
       <Text style={{marginTop: 20}}>
         Account Screen
       </Text>
-      <Text>
+      <Text style={styles.title}>
         {username}
       </Text>
+      <TouchableOpacity
+          style={[styles.button, { marginTop: 20 }]}
+          onPress={signOut}
+        >
+          <Text style={styles.buttonText}>Log Out</Text>
+        </TouchableOpacity>
     </View>
   );
 }

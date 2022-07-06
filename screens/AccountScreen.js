@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ActivityIndicator, Switch, Text, View, TouchableOpacity, Image } from "react-native";
 import { commonStyles, darkStyles, lightStyles } from "../styles/commonStyles";
-import { lightModeAction, darkModeAction } from "../redux/ducks/accountPref";
+import { changeModeAction } from "../redux/ducks/accountPref";
 import axios from "axios";
 import { API, API_WHOAMI } from "../constants/API";
 import { useSelector, useDispatch } from "react-redux";
@@ -58,7 +58,7 @@ export default function AccountScreen({ navigation }) {
   }
 
   function switchMode() {
-    dispatch(isDark ? lightModeAction() : darkModeAction());
+    dispatch(changeModeAction());
   }
   useEffect(() => {
     console.log("Setting up nav listener");

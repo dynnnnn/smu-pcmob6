@@ -12,6 +12,7 @@ export default function EditScreen({ navigation, route }) {
   const styles = { ...commonStyles, ...(isDark ? darkStyles : lightStyles) };
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const token = useSelector((state) => state.auth.token);
 
   useEffect(() => {
     const post = route.params.post
@@ -24,7 +25,7 @@ export default function EditScreen({ navigation, route }) {
       "title": title,
       "content": content,
     }
-    const token = await AsyncStorage.getItem("token");
+   
     const id = route.params.post.id
     try {
       console.log(token);

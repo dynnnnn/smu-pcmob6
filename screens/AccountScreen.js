@@ -86,8 +86,7 @@ export default function AccountScreen({ navigation }) {
       /> )}
       <TouchableOpacity onPress={camera}>
         <Text style={{ marginTop: 10, fontSize: 20, color: "#0000EE" }}>
-          {" "}
-          No profile picture. Click to take one.{" "}
+    {profilePicture ? "Change Profile Picture" : "No Profile Picture. Click to take one!"}
         </Text>
       </TouchableOpacity>
       <View

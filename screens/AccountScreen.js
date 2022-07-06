@@ -79,7 +79,11 @@ export default function AccountScreen({ navigation }) {
         {" "}
         Hello {username} !
       </Text>
-      <Image source={{ uri: profilePicture }} />
+      { profilePicture && (
+        <Image
+        source={{ uri: profilePicture?.uri }}
+        style={{ width: 250, height: 250, borderRadius: 200 }}
+      /> )}
       <TouchableOpacity onPress={camera}>
         <Text style={{ marginTop: 10, fontSize: 20, color: "#0000EE" }}>
           {" "}

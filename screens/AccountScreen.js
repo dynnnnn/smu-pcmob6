@@ -1,20 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
-import { ActivityIndicator, Switch, Text, View, TouchableOpacity, Image, Animated } from "react-native";
+import {
+  ActivityIndicator,
+  Switch,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  Animated,
+} from "react-native";
 import { commonStyles, darkStyles, lightStyles } from "../styles/commonStyles";
-import { changeModeAction } from "../redux/ducks/accountPref";
+import { changeModeAction, deletePicAction } from "../redux/ducks/accountPref";
 import axios from "axios";
 import { API, API_WHOAMI } from "../constants/API";
 import { useSelector, useDispatch } from "react-redux";
 import { logOutAction } from "../redux/ducks/blogAuth";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import profile from '../assets/profile.png';
+
 
 
 export default function AccountScreen({ navigation }) {
-
   const [username, setUsername] = useState(null);
   const [expanded, setExpanded] = useState(false);
-
-  
 
   const token = useSelector((state) => state.auth.token);
 
@@ -25,10 +32,11 @@ export default function AccountScreen({ navigation }) {
   const dispatch = useDispatch();
   const styles = { ...commonStyles, ...(isDark ? darkStyles : lightStyles) };
   const picSize = new Animated.Value(200);
+  
 
   async function getUsername() {
     console.log("---- Getting user name ----");
-    
+
     console.log(`Token is ${token}`);
     try {
       const response = await axios.get(API + API_WHOAMI, {
@@ -51,7 +59,6 @@ export default function AccountScreen({ navigation }) {
     }
   }
 
- 
   function signOut() {
     dispatch(logOutAction());
     navigation.navigate("SignInSignUp");
@@ -65,15 +72,17 @@ export default function AccountScreen({ navigation }) {
     dispatch(changeModeAction());
   }
 
-  function changePicSize(){
-   Animated.spring(picSize,{
+  function changePicSize() {
+    Animated.spring(picSize, {
       toValue: 300,
-      duration: 2500,
-      useNativeDriver: false
-    }).start()
-  } 
-    
-  
+      duration: 5000,
+      useNativeDriver: false,
+    }).start();
+  }
+
+  function deletePicture(){
+    dispatch(deletePicAction());
+  }
 
   useEffect(() => {
     console.log("Setting up nav listener");
@@ -89,23 +98,37 @@ export default function AccountScreen({ navigation }) {
 
   return (
     <View style={[styles.container, { alignItems: "center" }]}>
-     
       <Text style={[styles.title, styles.text, { marginTop: 30 }]}>
         {" "}
         Hello {username} !
       </Text>
-      { profilePicture == null ? <View /> : 
-        <Animated.Image
-        source={{ uri: profilePicture?.uri }}
-        style={{ width: picSize, height: picSize, borderRadius: 200 }}
-      /> }
       
+<View style={{ height: 320, justifyContent: 'center' }}>
+      {profilePicture == null ? <Image
+          source={ profile }
+          style={{ width: 300, height: 300, borderRadius: 200 }}
+        /> : 
+        <TouchableWithoutFeedback onPress={changePicSize}>
+        <Animated.Image
+          source={{ uri: profilePicture?.uri }}
+          style={{ width: picSize, height: picSize, borderRadius: 200 }}
+        /></TouchableWithoutFeedback>
+      }</View>
+
       <TouchableOpacity onPress={camera}>
         <Text style={{ marginTop: 10, fontSize: 20, color: "#0000EE" }}>
-    {profilePicture ? "Change Profile Picture" : "No Profile Picture. Click to take one!"}
+          {profilePicture
+            ? "Change Profile Picture"
+            : "No Profile Picture. Click to take one!"}
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={changePicSize}><Text style={{ marginTop: 10, fontSize: 20, color: "#0000EE" }}>Enlarge Picture</Text></TouchableOpacity>
+      {profilePicture ? (
+        <View>
+          <TouchableOpacity onPress={deletePicture}>
+            <Text style={{ marginTop: 10, fontSize: 20, color: "#0000EE" }}>Delete Profile Picture</Text>
+          </TouchableOpacity>
+        </View>
+      ) : null}
       <View
         style={{
           flexDirection: "row",
@@ -121,6 +144,5 @@ export default function AccountScreen({ navigation }) {
         <Text style={styles.buttonText}>Sign Out</Text>
       </TouchableOpacity>
     </View>
-    
   );
 }

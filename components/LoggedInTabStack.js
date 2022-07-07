@@ -27,7 +27,7 @@ export default function LoggedInStack() {
       tabBarOptions={{
         activeTintColor: 'tomato',
         inactiveTintColor: 'gray',
-        style: {
+        tabStyle: {
           backgroundColor: isDark ? "#181818" : "white",
         }
       }}>

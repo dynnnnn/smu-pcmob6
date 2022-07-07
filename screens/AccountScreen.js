@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { ActivityIndicator, Switch, Text, View, TouchableOpacity, Image } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import { ActivityIndicator, Switch, Text, View, TouchableOpacity, Image, Animated } from "react-native";
 import { commonStyles, darkStyles, lightStyles } from "../styles/commonStyles";
 import { changeModeAction } from "../redux/ducks/accountPref";
 import axios from "axios";
 import { API, API_WHOAMI } from "../constants/API";
 import { useSelector, useDispatch } from "react-redux";
 import { logOutAction } from "../redux/ducks/blogAuth";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+
 
 export default function AccountScreen({ navigation }) {
 
   const [username, setUsername] = useState(null);
+  const [expanded, setExpanded] = useState(false);
 
   
 
@@ -21,6 +24,7 @@ export default function AccountScreen({ navigation }) {
   );
   const dispatch = useDispatch();
   const styles = { ...commonStyles, ...(isDark ? darkStyles : lightStyles) };
+  const picSize = new Animated.Value(200);
 
   async function getUsername() {
     console.log("---- Getting user name ----");
@@ -60,6 +64,17 @@ export default function AccountScreen({ navigation }) {
   function switchMode() {
     dispatch(changeModeAction());
   }
+
+  function changePicSize(){
+   Animated.spring(picSize,{
+      toValue: 300,
+      duration: 2500,
+      useNativeDriver: false
+    }).start()
+  } 
+    
+  
+
   useEffect(() => {
     console.log("Setting up nav listener");
     // Check for when we come back to this screen
@@ -79,16 +94,18 @@ export default function AccountScreen({ navigation }) {
         {" "}
         Hello {username} !
       </Text>
-      { profilePicture && (
-        <Image
+      { profilePicture == null ? <View /> : 
+        <Animated.Image
         source={{ uri: profilePicture?.uri }}
-        style={{ width: 250, height: 250, borderRadius: 200 }}
-      /> )}
+        style={{ width: picSize, height: picSize, borderRadius: 200 }}
+      /> }
+      
       <TouchableOpacity onPress={camera}>
         <Text style={{ marginTop: 10, fontSize: 20, color: "#0000EE" }}>
     {profilePicture ? "Change Profile Picture" : "No Profile Picture. Click to take one!"}
         </Text>
       </TouchableOpacity>
+      <TouchableOpacity onPress={changePicSize}><Text style={{ marginTop: 10, fontSize: 20, color: "#0000EE" }}>Enlarge Picture</Text></TouchableOpacity>
       <View
         style={{
           flexDirection: "row",
@@ -104,5 +121,6 @@ export default function AccountScreen({ navigation }) {
         <Text style={styles.buttonText}>Sign Out</Text>
       </TouchableOpacity>
     </View>
+    
   );
 }

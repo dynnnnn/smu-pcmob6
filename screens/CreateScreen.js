@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-nativ
 import { commonStyles, darkStyles, lightStyles } from "../styles/commonStyles";
 import axios from "axios";
 import { API, API_CREATE } from "../constants/API";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { useSelector } from "react-redux";
 
 
@@ -38,9 +38,7 @@ export default function CreateScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text>
-        Create Post Screen
-      </Text>
+      
       <View style={{ margin: 20 }}>
         <Text style={[additionalStyles.label, styles.text]}>Enter Title:</Text>
         <TextInput

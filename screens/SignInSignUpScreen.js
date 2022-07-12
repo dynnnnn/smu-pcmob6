@@ -12,7 +12,7 @@ import {
   LayoutAnimation
 } from "react-native";
 import { API, API_LOGIN, API_SIGNUP } from "../constants/API";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import axios from "axios";
 import IndexScreen from "./IndexScreen";
 import { useDispatch } from "react-redux";

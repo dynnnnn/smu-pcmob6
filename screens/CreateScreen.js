@@ -16,11 +16,15 @@ export default function CreateScreen({ navigation }) {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [latestIssue, setLatestIssue] = useState("");
+  const [nextIssue, setNextIssue] = useState("");
 
   async function savePost() {
     const post = {
       title: title,
       content: content,
+      latestIssue : latestIssue,
+      nextIssue: nextIssue
     };
     
     try {
@@ -40,19 +44,35 @@ export default function CreateScreen({ navigation }) {
     <View style={styles.container}>
       
       <View style={{ margin: 20 }}>
-        <Text style={[additionalStyles.label, styles.text]}>Enter Title:</Text>
+        <Text style={[additionalStyles.label, styles.text]}>Series Title:</Text>
         <TextInput
           style={additionalStyles.input}
           value={title}
           onChangeText={(text) => setTitle(text)}
         />
         <Text style={[additionalStyles.label, styles.text]}>
-          Enter Content:
+          Description:
         </Text>
         <TextInput
           style={additionalStyles.input}
           value={content}
           onChangeText={(text) => setContent(text)}
+        />
+        <Text style={[additionalStyles.label, styles.text]}>
+          Latest Issue Read:
+        </Text>
+        <TextInput
+          style={additionalStyles.input}
+          value={latestIssue}
+          onChangeText={(text) => setLatestIssue(text)}
+        />
+         <Text style={[additionalStyles.label, styles.text]}>
+          Next Issue Release Date:
+        </Text>
+         <TextInput
+          style={additionalStyles.input}
+          value={nextIssue}
+          onChangeText={(text) => setNextIssue(text)}
         />
         <TouchableOpacity
           style={[styles.button, { marginTop: 20 }]}

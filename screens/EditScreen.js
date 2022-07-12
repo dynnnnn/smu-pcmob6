@@ -12,18 +12,24 @@ export default function EditScreen({ navigation, route }) {
   const styles = { ...commonStyles, ...(isDark ? darkStyles : lightStyles) };
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [latestIssue, setLatestIssue] = useState("");
+  const [nextIssue, setNextIssue] = useState("");
   const token = useSelector((state) => state.auth.token);
 
   useEffect(() => {
     const post = route.params.post
     setTitle(post.title);
     setContent(post.content);
+    setLatestIssue(post.latestIssue);
+    setNextIssue(post.nextIssue);
   }, [])
 
   async function editPost() {
     const post = {
       "title": title,
       "content": content,
+      "latestIssue": latestIssue,
+      "nextIssue": nextIssue,
     }
    
     const id = route.params.post.id
@@ -42,17 +48,29 @@ export default function EditScreen({ navigation, route }) {
   return (
     <View style={styles.container}>
       <View style={{ margin: 20 }}>
-        <Text style={[additionalStyles.label, styles.text]}>Enter Title:</Text>
+        <Text style={[additionalStyles.label, styles.text]}>Series Title:</Text>
         <TextInput
           style={additionalStyles.input}
           value={title}
           onChangeText={text => setTitle(text)}
         />
-        <Text style={[additionalStyles.label, styles.text]}>Enter Content:</Text>
+        <Text style={[additionalStyles.label, styles.text]}>Description:</Text>
         <TextInput
           style={additionalStyles.input}
           value={content}
           onChangeText={text => setContent(text)}
+        />
+         <Text style={[additionalStyles.label, styles.text]}>Latest Issue Read:</Text>
+        <TextInput
+          style={additionalStyles.input}
+          value={latestIssue}
+          onChangeText={text => setLatestIssue(text)}
+        />
+         <Text style={[additionalStyles.label, styles.text]}>Next Issue Date:</Text>
+        <TextInput
+          style={additionalStyles.input}
+          value={nextIssue}
+          onChangeText={text => setNextIssue(text)}
         />
       <TouchableOpacity style={[styles.button, {marginTop: 20}]} onPress={editPost}>
         <Text style={styles.buttonText}>

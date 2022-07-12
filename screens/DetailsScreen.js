@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 export default function ShowScreen({ navigation, route }) {
 
-  const [post, setPost] = useState({title: "", content: ""});
+  const [post, setPost] = useState({title: "", content: "", latestIssue: "", nextIssue:""});
   
   const token = useSelector((state) => state.auth.token);
   const isDark = useSelector((state) => state.accountPrefs.isDark);
@@ -56,6 +56,8 @@ export default function ShowScreen({ navigation, route }) {
     <View style={styles.container}>
       <Text style={[styles.title, styles.text]}>{post.title}</Text>
       <Text style={[styles.content, styles.text]}>{post.content}</Text>
+      <Text style={[styles.content, styles.text]}>{post.latestIssue}</Text>
+      <Text style={[styles.content, styles.text]}>{post.nextIssue}</Text>
     </View>
   );
 }

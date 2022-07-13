@@ -9,6 +9,7 @@ import UploadImage from "../components/UploadImage";
 
 
 
+
 export default function EditScreen({ navigation, route }) {
 
   const isDark = useSelector((state) => state.accountPrefs.isDark);
@@ -18,7 +19,12 @@ export default function EditScreen({ navigation, route }) {
   const [content, setContent] = useState("");
   const [latestIssue, setLatestIssue] = useState("");
   const [nextIssue, setNextIssue] = useState("");
+  
+ 
+
+
   const token = useSelector((state) => state.auth.token);
+
 
   useEffect(() => {
     const post = route.params.post
@@ -26,6 +32,7 @@ export default function EditScreen({ navigation, route }) {
     setContent(post.content);
     setLatestIssue(post.latestIssue);
     setNextIssue(post.nextIssue);
+    
   }, [])
 
   async function editPost() {
@@ -57,8 +64,7 @@ export default function EditScreen({ navigation, route }) {
   return (
     <ScrollView style={styles.container}>
       <View style={{ margin: 20 }}>
-      
-      <UploadImage />
+   <UploadImage />
       
         <Text style={[additionalStyles.label, styles.text]}>Series Title:</Text>
         <TextInput

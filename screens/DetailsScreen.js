@@ -59,7 +59,7 @@ export default function ShowScreen({ navigation, route }) {
       <Text style={[styles.content, styles.text]}>{post.content}</Text>
       <Text style={[styles.content, styles.text]}>{post.latestIssue}</Text>
       <Text style={[styles.content, styles.text]}>{post.nextIssue}</Text>
-      <Image source={{uri: image}} style={{ width: 300, height: 300}} />
+      <Image source={{uri: post.image}} style={{ width: 300, height: 300}} />
     </View>
   );
 }

@@ -11,13 +11,13 @@ import { useSelector } from 'react-redux';
 
 export default function UploadImage() {
     const dispatch = useDispatch();
-    const img = useSelector((state) => state.addpic.image);
+ 
 
     useEffect(() => {
         checkForCameraRollPermission()
       }, []);
 
- const [image, setImage] = useState(img);
+ const [image, setImage] = useState(null);
 
  const addImage = async()=>{
     let _image = await ImagePicker.launchImageLibraryAsync({
@@ -32,6 +32,8 @@ export default function UploadImage() {
       setImage(_image.uri);
       dispatch({...addPic(), payload: _image.uri})
     }
+
+   
  };
 
  const  checkForCameraRollPermission=async()=>{

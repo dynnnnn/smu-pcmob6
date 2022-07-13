@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from "react-native";
 import { commonStyles, darkStyles, lightStyles } from "../styles/commonStyles";
 import axios from "axios";
 import { API, API_CREATE } from "../constants/API";
-
+import UploadImage from '../components/UploadImage';
 import { useSelector } from "react-redux";
 
 
@@ -18,13 +18,17 @@ export default function CreateScreen({ navigation }) {
   const [content, setContent] = useState("");
   const [latestIssue, setLatestIssue] = useState("");
   const [nextIssue, setNextIssue] = useState("");
+  const [image, setImage] = useState(null);
+
+  
 
   async function savePost() {
     const post = {
       title: title,
       content: content,
       latestIssue : latestIssue,
-      nextIssue: nextIssue
+      nextIssue: nextIssue,
+      image: image
     };
     
     try {
@@ -41,9 +45,11 @@ export default function CreateScreen({ navigation }) {
 
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       
       <View style={{ margin: 20 }}>
+      <UploadImage image={image} />
+      
         <Text style={[additionalStyles.label, styles.text]}>Series Title:</Text>
         <TextInput
           style={additionalStyles.input}
@@ -81,7 +87,8 @@ export default function CreateScreen({ navigation }) {
           <Text style={styles.buttonText}>Save</Text>
         </TouchableOpacity>
       </View>
-    </View>
+      
+    </ScrollView>
   );
 }
 

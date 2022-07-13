@@ -13,6 +13,7 @@ export default function CreateScreen({ navigation }) {
   const token = useSelector((state) => state.auth.token);
   const isDark = useSelector((state) => state.accountPrefs.isDark);
   const image = useSelector((state) => state.addpic.image);
+  
   const styles = { ...commonStyles, ...(isDark ? darkStyles : lightStyles) };
 
   const [title, setTitle] = useState("");
@@ -20,10 +21,9 @@ export default function CreateScreen({ navigation }) {
   const [latestIssue, setLatestIssue] = useState("");
   const [nextIssue, setNextIssue] = useState("");
   
-
   
 
-  async function savePost() {
+async function savePost() {
     const post = {
       title: title,
       content: content,

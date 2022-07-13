@@ -4,18 +4,20 @@ import { AntDesign } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { useDispatch } from "react-redux";
 import { addPic } from '../redux/ducks/upload';
+import { useSelector } from 'react-redux';
 
 
 
 
 export default function UploadImage() {
     const dispatch = useDispatch();
+    const img = useSelector((state) => state.addpic.image);
 
     useEffect(() => {
         checkForCameraRollPermission()
       }, []);
 
- const [image, setImage] = useState(null);
+ const [image, setImage] = useState(img);
 
  const addImage = async()=>{
     let _image = await ImagePicker.launchImageLibraryAsync({

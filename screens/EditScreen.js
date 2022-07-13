@@ -7,6 +7,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import UploadImage from "../components/UploadImage";
 
+
+
 export default function EditScreen({ navigation, route }) {
 
   const isDark = useSelector((state) => state.accountPrefs.isDark);
@@ -48,10 +50,16 @@ export default function EditScreen({ navigation, route }) {
     }
   }
 
+ 
+
+  
+
   return (
     <ScrollView style={styles.container}>
       <View style={{ margin: 20 }}>
-    <UploadImage />
+      
+      <UploadImage />
+      
         <Text style={[additionalStyles.label, styles.text]}>Series Title:</Text>
         <TextInput
           style={additionalStyles.input}

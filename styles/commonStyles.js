@@ -18,12 +18,26 @@ export const commonStyles = {
   },
   content: {
     fontWeight: '400',
-    fontSize: 24,
+    fontSize: 15,
+    textAlign: 'center',
   },
   card:{
     height: 250,
     width: '50%'
-  }
+  },
+  greybox:{ 
+    width: '80%',
+    backgroundColor: 'lightgrey',
+    alignSelf: 'center',
+    borderRadius: 8,
+    marginTop: 15,
+    padding: 5
+  },
+  label: {
+    fontWeight: "bold",
+    fontSize: 15, 
+    textAlign: 'center',
+  },
 }
 
 export const lightStyles = {

@@ -96,13 +96,16 @@ async function savePost() {
 const additionalStyles = StyleSheet.create({
   input: {
     fontSize: 24,
-    borderWidth: 1,
-    borderColor: "black",
+    backgroundColor: 'lightgrey',
     marginBottom: 15,
+    height: 35,
+    borderRadius: 5
   },
   label: {
-    fontSize: 28,
-    marginBottom: 10,
+    fontSize: 15,
+    marginTop: 5,
     marginLeft: 5,
+    textAlign: 'center',
+    fontWeight: 'bold'
   },
 });

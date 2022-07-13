@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView, Image } from "react-native";
 import { commonStyles, lightStyles, darkStyles } from "../styles/commonStyles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { API, API_POSTS } from "../constants/API";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import UploadImage from "../components/UploadImage";
 
 export default function EditScreen({ navigation, route }) {
 
   const isDark = useSelector((state) => state.accountPrefs.isDark);
+  const image = useSelector((state) => state.addpic.image);
   const styles = { ...commonStyles, ...(isDark ? darkStyles : lightStyles) };
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -30,6 +32,7 @@ export default function EditScreen({ navigation, route }) {
       "content": content,
       "latestIssue": latestIssue,
       "nextIssue": nextIssue,
+      "image": image
     }
    
     const id = route.params.post.id
@@ -46,8 +49,9 @@ export default function EditScreen({ navigation, route }) {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={{ margin: 20 }}>
+    <UploadImage />
         <Text style={[additionalStyles.label, styles.text]}>Series Title:</Text>
         <TextInput
           style={additionalStyles.input}
@@ -78,7 +82,7 @@ export default function EditScreen({ navigation, route }) {
         </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 

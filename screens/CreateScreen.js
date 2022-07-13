@@ -12,13 +12,14 @@ export default function CreateScreen({ navigation }) {
 
   const token = useSelector((state) => state.auth.token);
   const isDark = useSelector((state) => state.accountPrefs.isDark);
+  const image = useSelector((state) => state.addpic.image);
   const styles = { ...commonStyles, ...(isDark ? darkStyles : lightStyles) };
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [latestIssue, setLatestIssue] = useState("");
   const [nextIssue, setNextIssue] = useState("");
-  const [image, setImage] = useState(null);
+  
 
   
 
@@ -48,7 +49,7 @@ export default function CreateScreen({ navigation }) {
     <ScrollView style={styles.container}>
       
       <View style={{ margin: 20 }}>
-      <UploadImage image={image} />
+      <UploadImage />
       
         <Text style={[additionalStyles.label, styles.text]}>Series Title:</Text>
         <TextInput

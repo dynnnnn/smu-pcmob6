@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Image, View, Platform, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import { useDispatch } from "react-redux";
+import { addPic } from '../redux/ducks/upload';
 
 
 
 
 export default function UploadImage() {
+    const dispatch = useDispatch();
 
     useEffect(() => {
         checkForCameraRollPermission()
@@ -25,6 +28,7 @@ export default function UploadImage() {
 
     if (!_image.cancelled) {
       setImage(_image.uri);
+      dispatch({...addPic(), payload: _image.uri})
     }
  };
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
+import { Text, View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { commonStyles, lightStyles, darkStyles } from "../styles/commonStyles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -13,6 +13,7 @@ export default function ShowScreen({ navigation, route }) {
   
   const token = useSelector((state) => state.auth.token);
   const isDark = useSelector((state) => state.accountPrefs.isDark);
+  const image = useSelector((state) => state.addpic.image);
   const styles = { ...commonStyles, ...(isDark ? darkStyles : lightStyles) };
 
 
@@ -58,6 +59,7 @@ export default function ShowScreen({ navigation, route }) {
       <Text style={[styles.content, styles.text]}>{post.content}</Text>
       <Text style={[styles.content, styles.text]}>{post.latestIssue}</Text>
       <Text style={[styles.content, styles.text]}>{post.nextIssue}</Text>
+      <Image source={{uri: image}} style={{ width: 300, height: 300}} />
     </View>
   );
 }

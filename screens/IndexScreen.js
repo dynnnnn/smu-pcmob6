@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, TouchableOpacity, FlatList, RefreshControl } from "react-native";
+import { Text, View, TouchableOpacity, FlatList, RefreshControl, Image, SafeAreaView } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -14,6 +14,7 @@ export default function IndexScreen({ navigation, route }) {
   
   const token = useSelector((state) => state.auth.token);
   const isDark = useSelector((state) => state.accountPrefs.isDark);
+  const image = useSelector((state) => state.addpic.image);
   const styles = isDark ? darkStyles : lightStyles;
 
   // This is to set up the top right button
@@ -88,9 +89,10 @@ export default function IndexScreen({ navigation, route }) {
             paddingBottom: 20,
             borderBottomColor: "#ccc",
             borderBottomWidth: 1,
-            flexDirection: "row",
-            justifyContent: "space-between",
+            flexDirection: 'column',
+            margin: 1
           }}>
+         <Image source={{uri: item.image}} style={{ width: 180, height: 250}} />
           <Text style={styles.text}>{item.title}</Text>
           <TouchableOpacity onPress={() => deletePost(item.id)}>
             <FontAwesome name="trash" size={20} color="#a80000" />
@@ -104,8 +106,10 @@ export default function IndexScreen({ navigation, route }) {
     <View style={styles.container}>
       <FlatList
         data={posts}
+        key={item => item.id}
+        numColumns={2}
         renderItem={renderItem}
-        style={{ width: "100%" }}
+        // style={{ width: "50%" }}
         keyExtractor={(item) => item.id.toString()}
         refreshControl={
           <RefreshControl

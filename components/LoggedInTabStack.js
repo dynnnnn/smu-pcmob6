@@ -15,7 +15,7 @@ export default function LoggedInStack() {
         tabBarIcon: ({ color, size }) => {
           let iconName;
 
-          if (route.name === 'Blog') {
+          if (route.name === 'My Comics') {
             iconName = "comments"
           } else if (route.name === 'Settings') {
             iconName = "cog"
@@ -25,13 +25,13 @@ export default function LoggedInStack() {
         },
       })}
       tabBarOptions={{
-        activeTintColor: 'tomato',
-        inactiveTintColor: 'gray',
+        activeTintColor: '#18dbd8',
+        inactiveTintColor: 'black',
         tabStyle: {
           backgroundColor: isDark ? "#181818" : "white",
         }
-      }}>
-        <Tab.Screen name="Blog" component={BlogStack} />
+      }} >
+        <Tab.Screen name="My Comics" component={BlogStack} />
         <Tab.Screen name="Settings" component={AccountStack} />
       </Tab.Navigator>
   )

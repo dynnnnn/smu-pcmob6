@@ -20,29 +20,33 @@ export const commonStyles = {
     fontWeight: '400',
     fontSize: 24,
   },
+  card:{
+    height: 250,
+    width: '50%'
+  }
 }
 
 export const lightStyles = {
   container: {
     flex: 1,
-    backgroundColor: "#ffc",
+    backgroundColor: "white",
   },
   text: {
     color: "black",
   },
   header: {
-    backgroundColor: "yellow",
+    backgroundColor: "white",
     height: 100,
-    shadowColor: "black",
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
+    // shadowColor: "black",
+    // shadowOpacity: 0.2,
+    // shadowRadius: 5,
   },
   headerTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#f55"
+    color: "black"
   },
-  headerTint: "#f55"
+  // headerTint: "#f55"
 };
 
 export const darkStyles = {

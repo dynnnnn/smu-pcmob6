@@ -56,7 +56,7 @@ export const lightStyles = {
   },
   header: {
     backgroundColor: "white",
-    height: 100,
+    height: 150,
     // shadowColor: "black",
     // shadowOpacity: 0.2,
     // shadowRadius: 5,
@@ -79,7 +79,7 @@ export const darkStyles = {
   },
   header: {
     backgroundColor: "#444444",
-    height: 100,
+    height: 150,
     shadowColor: "black",
     shadowOpacity: 0.2,
     shadowRadius: 5,

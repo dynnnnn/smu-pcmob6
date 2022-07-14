@@ -9,7 +9,7 @@ import {
   Animated,
 } from "react-native";
 import { commonStyles, darkStyles, lightStyles } from "../styles/commonStyles";
-import { changeModeAction, deletePicAction } from "../redux/ducks/accountPref";
+import { changeModeAction, deletePicAction, listAction } from "../redux/ducks/accountPref";
 import axios from "axios";
 import { API, API_WHOAMI } from "../constants/API";
 import { useSelector, useDispatch } from "react-redux";
@@ -28,6 +28,7 @@ export default function AccountScreen({ navigation }) {
   const token = useSelector((state) => state.auth.token);
 
   const isDark = useSelector((state) => state.accountPrefs.isDark);
+  const isList = useSelector((state) => state.accountPrefs.isList);
   const profilePicture = useSelector(
     (state) => state.accountPrefs.profilePicture
   );
@@ -73,6 +74,11 @@ export default function AccountScreen({ navigation }) {
 
   function switchMode() {
     dispatch(changeModeAction());
+  }
+
+  function listMode() {
+    dispatch(listAction());
+    
   }
 
   function changePicSize() {
@@ -142,6 +148,17 @@ export default function AccountScreen({ navigation }) {
       >
         <Text style={[styles.content, styles.text]}> Dark Mode? </Text>
         <Switch value={isDark} onValueChange={switchMode} />
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          margin: 20,
+        }}
+      >
+        <Text style={[styles.content, styles.text]}> List View? </Text>
+        <Switch value={isList} onValueChange={listMode} />
       </View>
       <TouchableOpacity style={[styles.button]} onPress={signOut}>
         <Text style={styles.buttonText}>Sign Out</Text>

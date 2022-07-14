@@ -27,6 +27,7 @@ export default function IndexScreen({ navigation, route }) {
   const token = useSelector((state) => state.auth.token);
   const isDark = useSelector((state) => state.accountPrefs.isDark);
   const image = useSelector((state) => state.addpic.image);
+  const isList = useSelector((state) => state.accountPrefs.isList);
 
   const styles = { ...commonStyles, ...(isDark ? darkStyles : lightStyles) };
 
@@ -80,6 +81,7 @@ export default function IndexScreen({ navigation, route }) {
 
   function addPost() {
     navigation.navigate("Add");
+    console.log(posts.length)
   }
 
   async function deletePost(id) {
@@ -110,7 +112,31 @@ export default function IndexScreen({ navigation, route }) {
       <TouchableOpacity
         onPress={() => navigation.navigate("Details", { id: item.id })}
       >
+      {isList ? 
+      
+      
         <View
+          style={{
+            padding: 10,
+            paddingTop: 20,
+            paddingBottom: 20,
+            borderBottomColor: "#ccc",
+            borderBottomWidth: 1,
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}>
+          
+          <Text style={styles.label}>{item.title}</Text>
+          <TouchableOpacity
+            onPress={() => showAlertHandler(item.id)}
+            style={{ paddingTop: 15 }}
+          >
+            <Feather name="x-circle" size={25} color="red" />
+          </TouchableOpacity>
+        </View>
+      
+      
+      : <View
           style={{
             padding: 10,
             paddingTop: 20,
@@ -133,14 +159,33 @@ export default function IndexScreen({ navigation, route }) {
           >
             <Feather name="x-circle" size={25} color="red" />
           </TouchableOpacity>
-        </View>
+        </View> }
+        
       </TouchableOpacity>
     );
   }
 
   return (
+    
     <View style={styles.container}>
+    { posts.length === 0 && <Text onPress={addPost} style={styles.label}>No comics! Add some now!</Text>}
+     {isList?  
       <FlatList
+        data={posts}
+        renderItem={renderItem}
+        style={{ width: "100%" }}
+        keyExtractor={(item) => item.id.toString()}
+        refreshControl={
+          <RefreshControl
+          refreshing={refreshing}
+          //onRefresh={onRefresh}
+          colors={["black"]}
+      />
+        }
+        /> :
+
+     
+     <FlatList
         data={posts}
         key={(item) => item.id}
         numColumns={2}
@@ -153,7 +198,7 @@ export default function IndexScreen({ navigation, route }) {
             colors={["black"]}
           />
         }
-      />
+      /> }
       {showAlert && (
         <View style={[styles.greybox]}>
           <Text style={styles.dialog}>Confirm Delete?</Text>

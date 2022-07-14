@@ -23,17 +23,25 @@ export default function LoggedInStack() {
           }
           // You can return any component that you like here!
           return <FontAwesome name={iconName} size={size} color={color} />;
-        },
+        }, 
+    //     tabBarStyle:{
+    //   backgroundColor:'#0000ff',
+    //   height:100,
+    // },
       })}
+      // tabBarLabel={() => null}
+      
       tabBarOptions={{
         activeTintColor: '#18dbd8',
         inactiveTintColor: 'black',
         tabStyle: {
           backgroundColor: isDark ? "#181818" : "white",
-        }
+        },
+        
+        // headerShown: false
       }} >
-        <Tab.Screen name="My Comics" component={BlogStack} />
-        <Tab.Screen name="Settings" component={AccountStack} />
+        <Tab.Screen name="My Comics" options={{ headerShown: false }} component={BlogStack} />
+        <Tab.Screen name="Settings" options={{ headerShown: false }} component={AccountStack} />
       </Tab.Navigator>
   )
 } 

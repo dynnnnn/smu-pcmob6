@@ -188,11 +188,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   inputView: {
-    backgroundColor: "#FFC0CB",
-    borderRadius: 30,
+    backgroundColor: "#efefef",
+    borderRadius: 10,
     width: "70%",
     height: 45,
-    marginBottom: 20,
+    marginBottom: 30,
     alignItems: "center",
   },
   textInput: {
@@ -201,13 +201,16 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   button: {
-    backgroundColor: "blue",
-    borderRadius: 25,
+    backgroundColor: "black",
+    borderRadius: 10,
+    width: 120,
+    alignItems: 'center',
+    
   },
   buttonText: {
     fontWeight: "400",
-    fontSize: 20,
-    margin: 20,
+    fontSize: 15,
+    margin: 15,
     color: "white",
   },
   errorText: {

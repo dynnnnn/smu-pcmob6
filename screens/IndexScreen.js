@@ -140,8 +140,8 @@ export default function IndexScreen({ navigation, route }) {
       : <View
           style={{
             padding: 10,
-            paddingTop: 20,
-            paddingBottom: 20,
+            paddingTop: 10,
+            paddingBottom: 10,
             borderBottomColor: "lightgrey",
             borderBottomWidth: 0.5,
             flexDirection: "column",

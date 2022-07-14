@@ -105,7 +105,7 @@ const additionalStyles = StyleSheet.create({
     fontSize: 20,
     backgroundColor: '#ededed',
     marginBottom: 15,
-    height: 35,
+    height: 40,
     borderRadius: 5,
     textAlign: 'center'
   },

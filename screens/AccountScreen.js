@@ -17,6 +17,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { logOutAction } from "../redux/ducks/blogAuth";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import profile from '../assets/profile.png';
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { Ionicons } from '@expo/vector-icons'; 
 
 
 
@@ -125,26 +127,35 @@ export default function AccountScreen({ navigation }) {
         /></TouchableWithoutFeedback>
       }</View>
 
-      <TouchableOpacity onPress={camera}>
-        <Text style={{ marginTop: 10, fontSize: 15, color: "#0000EE" }}>
-          {profilePicture
-            ? "Change Profile Picture"
-            : "No Profile Picture. Click to take one!"}
-        </Text>
-      </TouchableOpacity>
-      {profilePicture ? (
-        <View>
-          <TouchableOpacity onPress={deletePicture}>
-            <Text style={{ marginTop: 10, fontSize: 15, color: "#0000EE" }}>Delete Profile Picture</Text>
+      { profilePicture ? 
+      <View style={{ flexDirection: 'row' }}>
+      <TouchableOpacity onPress={camera} style={{ paddingRight: 5 }}>
+      <MaterialCommunityIcons
+            name="pencil-circle"
+            size={28}
+            color={styles.headerTint}
+          /> 
           </TouchableOpacity>
-        </View>
-      ) : null}
+
+          <TouchableOpacity onPress={deletePicture} style={{ paddingLeft: 5 }}>
+          <Ionicons name="close-circle-sharp" size={28} color={styles.headerTint} />
+          </TouchableOpacity>
+
+          </View> : 
+          <TouchableOpacity onPress={camera} style={{ paddingTop: 15 }}>
+          <Text style={[styles.content, styles.text]}>Add Profile Picture</Text>
+          </TouchableOpacity>
+          
+          }
+
+      
+    <View style={{ flexDirection: 'row', margin: 20 }}>
       <View
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
-          margin: 2,
+          margin: 5,
         }}
       >
         <Text style={[styles.content, styles.text]}> Dark Mode? </Text>
@@ -160,6 +171,7 @@ export default function AccountScreen({ navigation }) {
       >
         <Text style={[styles.content, styles.text]}> List View? </Text>
         <Switch value={isList} onValueChange={listMode} />
+      </View>
       </View>
       <TouchableOpacity style={[styles.button]} onPress={signOut}>
         <Text style={styles.buttonText}>Sign Out</Text>

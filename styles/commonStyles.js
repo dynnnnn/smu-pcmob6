@@ -2,14 +2,14 @@ export const commonStyles = {
   
   button: {
     backgroundColor: '#18dbd8',
-    borderRadius: 15,
-    width: 150,
+    borderRadius: 10,
+    width: 250,
     alignItems: "center",
     margin: 5
   },
   buttonText: {
     fontWeight: '400',
-    fontSize: 15, 
+    fontSize: 17, 
     margin: 10,
     color: 'black',
   },

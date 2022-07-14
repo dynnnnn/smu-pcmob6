@@ -130,7 +130,7 @@ export default function IndexScreen({ navigation, route }) {
           <Text style={[styles.label, styles.text]}>{item.title}</Text>
           <TouchableOpacity
             onPress={() => showAlertHandler(item.id)}
-            style={{ paddingTop: 15 }}
+            // style={{ paddingTop: 10 }}
           >
             <Feather name="x-circle" size={25} color="red" />
           </TouchableOpacity>

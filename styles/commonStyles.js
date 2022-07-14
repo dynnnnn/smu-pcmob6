@@ -40,7 +40,7 @@ export const commonStyles = {
   },
   label: {
     fontWeight: "bold",
-    fontSize: 15, 
+    fontSize: 16, 
     textAlign: 'center',
   },
   dialog: {

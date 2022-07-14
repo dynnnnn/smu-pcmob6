@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import BlogStack from '../components/BlogStack';
 import AccountStack from '../components/AccountStack';
 import { FontAwesome } from '@expo/vector-icons'; 
+import { FontAwesome5 } from '@expo/vector-icons';
 import { useSelector } from "react-redux";
 
 const Tab = createBottomTabNavigator();
@@ -16,7 +17,7 @@ export default function LoggedInStack() {
           let iconName;
 
           if (route.name === 'My Comics') {
-            iconName = "comments"
+            iconName = "bookmark"
           } else if (route.name === 'Settings') {
             iconName = "cog"
           }

@@ -13,6 +13,7 @@ export default function CreateScreen({ navigation }) {
   const token = useSelector((state) => state.auth.token);
   const isDark = useSelector((state) => state.accountPrefs.isDark);
   const image = useSelector((state) => state.addpic.image);
+ 
   
   const styles = { ...commonStyles, ...(isDark ? darkStyles : lightStyles) };
 
@@ -82,7 +83,7 @@ async function savePost() {
           onChangeText={(text) => setNextIssue(text)}
         />
         <TouchableOpacity
-          style={[styles.button, { marginTop: 20 }]}
+          style={[styles.button, { marginTop: 20, alignSelf:'center' }]}
           onPress={savePost}
         >
           <Text style={styles.buttonText}>Save</Text>

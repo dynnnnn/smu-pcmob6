@@ -34,6 +34,8 @@ export default function CameraScreen({ navigation }) {
     navigation.navigate("Account");
   }
 
+  
+
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (

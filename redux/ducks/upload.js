@@ -1,8 +1,13 @@
 export const ADD_PIC = "add_pic";
+export const ADD_PROFILE_PIC = "add_profile_pic";
 
 export function addPic(){
     return { type: ADD_PIC}
 }
+export function addProfilePic(){
+    return { type: ADD_PROFILE_PIC}
+}
+
 
 const initialState = {image : null};
 

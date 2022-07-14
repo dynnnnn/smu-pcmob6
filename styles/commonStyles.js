@@ -2,8 +2,9 @@ export const commonStyles = {
   button: {
     backgroundColor: 'black',
     borderRadius: 15,
-    width: "50%",
-    alignItems: "center"
+    width: 150,
+    alignItems: "center",
+    margin: 5
   },
   buttonText: {
     fontWeight: '400',
@@ -37,6 +38,11 @@ export const commonStyles = {
     fontWeight: "bold",
     fontSize: 15, 
     textAlign: 'center',
+  },
+  dialog: {
+    fontSize: 20, 
+    textAlign: 'center',
+    padding: 10
   },
 }
 

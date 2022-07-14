@@ -1,28 +1,45 @@
-import React, { useEffect, useState } from "react";
-import { Text, View, TouchableOpacity, FlatList, RefreshControl, Image, SafeAreaView, Alert } from "react-native";
+import React, { useEffect, useState, useRef } from "react";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  FlatList,
+  RefreshControl,
+  Image,
+  SafeAreaView,
+  Alert,
+  Button,
+} from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { API, API_POSTS } from "../constants/API";
-import { lightStyles, darkStyles } from "../styles/commonStyles";
+import { commonStyles, lightStyles, darkStyles } from "../styles/commonStyles";
 import { useSelector } from "react-redux";
+import { Feather } from "@expo/vector-icons";
 
 export default function IndexScreen({ navigation, route }) {
-
   const [posts, setPosts] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
-  
+  const [showAlert, setShowAlert] = useState(false);
+  const idRef = useRef();
+
   const token = useSelector((state) => state.auth.token);
   const isDark = useSelector((state) => state.accountPrefs.isDark);
   const image = useSelector((state) => state.addpic.image);
-  const styles = isDark ? darkStyles : lightStyles;
+
+  const styles = { ...commonStyles, ...(isDark ? darkStyles : lightStyles) };
 
   // This is to set up the top right button
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <TouchableOpacity onPress={addPost}>
-          <FontAwesome name="plus" size={24} style={{ color: styles.headerTint, marginRight: 15 }} />
+          <FontAwesome
+            name="plus"
+            size={24}
+            style={{ color: styles.headerTint, marginRight: 15 }}
+          />
         </TouchableOpacity>
       ),
     });
@@ -43,22 +60,22 @@ export default function IndexScreen({ navigation, route }) {
     try {
       const response = await axios.get(API + API_POSTS, {
         headers: { Authorization: `JWT ${token}` },
-      })
+      });
       console.log(response.data);
       setPosts(response.data);
-      return "completed"
+      return "completed";
     } catch (error) {
       console.log(error.response.data);
-      if (error.response.data.error = "Invalid token") {
+      if ((error.response.data.error = "Invalid token")) {
         navigation.navigate("SignInSignUp");
       }
     }
   }
 
-  async function onRefresh(){
-    setRefreshing(true)
+  async function onRefresh() {
+    setRefreshing(true);
     const response = await getPosts();
-    setRefreshing(false)
+    setRefreshing(false);
   }
 
   function addPost() {
@@ -66,38 +83,55 @@ export default function IndexScreen({ navigation, route }) {
   }
 
   async function deletePost(id) {
-    console.log("Deleting " + id);
     try {
       const response = await axios.delete(API + API_POSTS + `/${id}`, {
         headers: { Authorization: `JWT ${token}` },
-      })
+      });
       console.log(response);
       setPosts(posts.filter((item) => item.id !== id));
+      setShowAlert(false);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
-  
-  
+
+  function showAlertHandler(id) {
+    idRef.current = id;
+    setShowAlert(true);
+  }
+
+  function hideAlertHandler() {
+    setShowAlert(false);
+  }
 
   // The function to render each row in our FlatList
   function renderItem({ item }) {
     return (
-      <TouchableOpacity onPress={() => navigation.navigate("Details", {id: item.id})}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Details", { id: item.id })}
+      >
         <View
           style={{
             padding: 10,
             paddingTop: 20,
             paddingBottom: 20,
-            borderBottomColor: "#ccc",
-            borderBottomWidth: 1,
-            flexDirection: 'column',
-            margin: 1
-          }}>
-         <Image source={{uri: item.image}} style={{ width: 180, height: 250}} />
+            borderBottomColor: "lightgrey",
+            borderBottomWidth: 0.5,
+            flexDirection: "column",
+            margin: 1,
+            alignItems: "center",
+          }}
+        >
+          <Image
+            source={{ uri: item.image }}
+            style={{ width: 180, height: 250 }}
+          />
           <Text style={styles.label}>{item.title}</Text>
-          <TouchableOpacity onPress={() => deletePost(item.id)}>
-            <FontAwesome name="trash" size={20} color="#a80000" />
+          <TouchableOpacity
+            onPress={() => showAlertHandler(item.id)}
+            style={{ paddingTop: 15 }}
+          >
+            <Feather name="x-circle" size={25} color="red" />
           </TouchableOpacity>
         </View>
       </TouchableOpacity>
@@ -108,19 +142,38 @@ export default function IndexScreen({ navigation, route }) {
     <View style={styles.container}>
       <FlatList
         data={posts}
-        key={item => item.id}
+        key={(item) => item.id}
         numColumns={2}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
         refreshControl={
           <RefreshControl
-          refreshing={refreshing}
-          //onRefresh={onRefresh}
-          colors={["black"]}
-      />
+            refreshing={refreshing}
+            //onRefresh={onRefresh}
+            colors={["black"]}
+          />
         }
-        />
+      />
+      {showAlert && (
+        <View style={[styles.greybox]}>
+          <Text style={styles.dialog}>Confirm Delete?</Text>
+          <View style={{ flexDirection: "row" }}>
+            <TouchableOpacity
+              style={[styles.button]}
+              onPress={() => deletePost(idRef.current)}
+            >
+              <Text style={styles.buttonText}>Yes</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.button]}
+              onPress={hideAlertHandler}
+            >
+              <Text style={styles.buttonText}>No</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
     </View>
   );
 }
-

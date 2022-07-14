@@ -19,9 +19,11 @@ import profile from '../assets/profile.png';
 
 
 
+
 export default function AccountScreen({ navigation }) {
   const [username, setUsername] = useState(null);
   const [expanded, setExpanded] = useState(false);
+  
 
   const token = useSelector((state) => state.auth.token);
 
@@ -29,6 +31,7 @@ export default function AccountScreen({ navigation }) {
   const profilePicture = useSelector(
     (state) => state.accountPrefs.profilePicture
   );
+ 
   const dispatch = useDispatch();
   const styles = { ...commonStyles, ...(isDark ? darkStyles : lightStyles) };
   const picSize = new Animated.Value(200);

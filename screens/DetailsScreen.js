@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { API, API_POSTS } from "../constants/API";
 import { useSelector } from "react-redux";
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 export default function ShowScreen({ navigation, route }) {
   const [post, setPost] = useState({
@@ -24,9 +25,9 @@ export default function ShowScreen({ navigation, route }) {
     navigation.setOptions({
       headerRight: () => (
         <TouchableOpacity onPress={editPost} style={{ marginRight: 10 }}>
-          <FontAwesome
-            name="pencil-square-o"
-            size={30}
+          <MaterialCommunityIcons
+            name="pencil-circle"
+            size={36}
             color={styles.headerTint}
           />
         </TouchableOpacity>
@@ -65,13 +66,13 @@ export default function ShowScreen({ navigation, route }) {
 
       <Image
         source={{ uri: post.image }}
-        style={{ width: 300, height: 400, alignSelf: "center" }}
+        style={{ width: 270, height: 350, alignSelf: "center" }}
       />
       <View style={[styles.greybox]}>
         <Text style={[styles.label]}>
           Description:
         </Text>
-        <Text style={[styles.content, styles.text]}>
+        <Text style={[styles.content]}>
           {post.content}
         </Text>
       </View>
@@ -79,7 +80,7 @@ export default function ShowScreen({ navigation, route }) {
       <Text style={[styles.label]}>
         Latest Issue Read:
       </Text>
-      <Text style={[styles.content, styles.text]}>
+      <Text style={[styles.content]}>
         {post.latestIssue}
       </Text>
       </View>
@@ -87,7 +88,7 @@ export default function ShowScreen({ navigation, route }) {
       <Text style={[styles.label]}>
         Next Issue Release:
       </Text>
-      <Text style={[styles.content, styles.text]}>
+      <Text style={[styles.content]}>
         {post.nextIssue}
       </Text>
       </View>

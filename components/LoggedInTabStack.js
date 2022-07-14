@@ -35,7 +35,7 @@ export default function LoggedInStack() {
         activeTintColor: '#18dbd8',
         inactiveTintColor: 'black',
         tabStyle: {
-          backgroundColor: isDark ? "#181818" : "white",
+          backgroundColor: isDark ? "#324a52" : "white",
         },
         
         // headerShown: false

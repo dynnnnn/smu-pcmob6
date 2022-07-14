@@ -68,13 +68,14 @@ export default function UploadImage() {
 const imageUploaderStyles=StyleSheet.create({
    container:{
        elevation:2,
-       height:300,
-       width:200,
+       height:250,
+       width:160,
        backgroundColor:'#efefef',
        position:'relative',
        borderRadius:0,
        overflow:'hidden',
-       alignSelf: 'center'
+       alignSelf: 'center',
+       margin: 3
    },
    uploadBtnContainer:{
        opacity:0.7,

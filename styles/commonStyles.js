@@ -1,6 +1,7 @@
 export const commonStyles = {
+  
   button: {
-    backgroundColor: 'black',
+    backgroundColor: '#18dbd8',
     borderRadius: 15,
     width: 150,
     alignItems: "center",
@@ -8,14 +9,15 @@ export const commonStyles = {
   },
   buttonText: {
     fontWeight: '400',
-    fontSize: 20, 
+    fontSize: 15, 
     margin: 10,
-    color: 'white',
+    color: 'black',
   },
   title: {
     fontWeight: "bold",
-    fontSize: 30, 
+    fontSize: 24, 
     textAlign: 'center',
+    padding: 8
   },
   content: {
     fontWeight: '400',
@@ -28,11 +30,13 @@ export const commonStyles = {
   },
   greybox:{ 
     width: '80%',
-    backgroundColor: 'lightgrey',
+    backgroundColor: '#f2f2f2',
     alignSelf: 'center',
     borderRadius: 8,
     marginTop: 15,
-    padding: 5
+    padding: 5,
+    alignItems: 'center'
+  
   },
   label: {
     fontWeight: "bold",
@@ -40,9 +44,23 @@ export const commonStyles = {
     textAlign: 'center',
   },
   dialog: {
-    fontSize: 20, 
+    fontSize: 17, 
     textAlign: 'center',
     padding: 10
+  },
+  dialogbutton: {
+    backgroundColor: 'red',
+    borderRadius: 15,
+    width: 100,
+    alignItems: "center",
+    margin: 10
+  },
+  dialogcancelbutton: {
+    backgroundColor: 'grey',
+    borderRadius: 15,
+    width: 100,
+    alignItems: "center",
+    margin: 10
   },
 }
 
@@ -56,10 +74,8 @@ export const lightStyles = {
   },
   header: {
     backgroundColor: "white",
-    height: 150,
-    // shadowColor: "black",
-    // shadowOpacity: 0.2,
-    // shadowRadius: 5,
+    height: 140,
+    
   },
   headerTitle: {
     fontSize: 24,
@@ -72,22 +88,22 @@ export const lightStyles = {
 export const darkStyles = {
   container: {
     flex: 1,
-    backgroundColor: "#878683",
+    backgroundColor: "black",
   },
   text: {
     color: "white",
   },
   header: {
-    backgroundColor: "#444444",
-    height: 150,
-    shadowColor: "black",
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
+    backgroundColor: "black",
+    height: 140,
+    // shadowColor: "black",
+    // shadowOpacity: 0.2,
+    // shadowRadius: 5,
   },
   headerTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#f4d47c"
+    color: "white"
   },
-  headerTint: "#f4d47c"
+  headerTint: "#18dbd8"
 }

@@ -65,11 +65,12 @@ export default function EditScreen({ navigation, route }) {
       <View style={{ margin: 20 }}>
    <UploadImage />
       
+        
         <Text style={[additionalStyles.label, styles.text]}>Series Title:</Text>
         <TextInput
           style={additionalStyles.input}
           value={title}
-          onChangeText={text => setTitle(text)}
+          onChangeText={(text) => setTitle(text)}
         />
         <Text style={[additionalStyles.label, styles.text]}>Description:</Text>
         <TextInput
@@ -89,7 +90,7 @@ export default function EditScreen({ navigation, route }) {
           value={nextIssue}
           onChangeText={text => setNextIssue(text)}
         />
-      <TouchableOpacity style={[styles.button, {marginTop: 20}]} onPress={editPost}>
+      <TouchableOpacity style={[styles.button, {marginTop: 20, alignSelf:'center'}]} onPress={editPost}>
         <Text style={styles.buttonText}>
           Save
         </Text>
@@ -101,14 +102,18 @@ export default function EditScreen({ navigation, route }) {
 
 const additionalStyles = StyleSheet.create({
   input: {
-    fontSize: 24,
-    borderWidth: 1,
-    borderColor: "black",
+    fontSize: 20,
+    backgroundColor: '#ededed',
     marginBottom: 15,
+    height: 35,
+    borderRadius: 5,
+    textAlign: 'center'
   },
   label: {
-    fontSize: 28,
-    marginBottom: 10,
-    marginLeft: 5
-  }
+    fontSize: 15,
+    marginTop: 5,
+    marginLeft: 5,
+    textAlign: 'center',
+    fontWeight: 'bold'
+  },
 }); 

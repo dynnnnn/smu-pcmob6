@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   Animated,
+  ScrollView
 } from "react-native";
 import { commonStyles, darkStyles, lightStyles } from "../styles/commonStyles";
 import { changeModeAction, deletePicAction, listAction } from "../redux/ducks/accountPref";
@@ -125,7 +126,7 @@ export default function AccountScreen({ navigation }) {
       }</View>
 
       <TouchableOpacity onPress={camera}>
-        <Text style={{ marginTop: 10, fontSize: 20, color: "#0000EE" }}>
+        <Text style={{ marginTop: 10, fontSize: 15, color: "#0000EE" }}>
           {profilePicture
             ? "Change Profile Picture"
             : "No Profile Picture. Click to take one!"}
@@ -134,7 +135,7 @@ export default function AccountScreen({ navigation }) {
       {profilePicture ? (
         <View>
           <TouchableOpacity onPress={deletePicture}>
-            <Text style={{ marginTop: 10, fontSize: 20, color: "#0000EE" }}>Delete Profile Picture</Text>
+            <Text style={{ marginTop: 10, fontSize: 15, color: "#0000EE" }}>Delete Profile Picture</Text>
           </TouchableOpacity>
         </View>
       ) : null}
@@ -143,7 +144,7 @@ export default function AccountScreen({ navigation }) {
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
-          margin: 20,
+          margin: 2,
         }}
       >
         <Text style={[styles.content, styles.text]}> Dark Mode? </Text>
@@ -154,7 +155,7 @@ export default function AccountScreen({ navigation }) {
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
-          margin: 20,
+          margin: 5,
         }}
       >
         <Text style={[styles.content, styles.text]}> List View? </Text>

@@ -17,6 +17,7 @@ import { API, API_POSTS } from "../constants/API";
 import { commonStyles, lightStyles, darkStyles } from "../styles/commonStyles";
 import { useSelector } from "react-redux";
 import { Feather } from "@expo/vector-icons";
+import { AntDesign } from '@expo/vector-icons'; 
 
 export default function IndexScreen({ navigation, route }) {
   const [posts, setPosts] = useState([]);
@@ -36,9 +37,9 @@ export default function IndexScreen({ navigation, route }) {
     navigation.setOptions({
       headerRight: () => (
         <TouchableOpacity onPress={addPost}>
-          <FontAwesome
-            name="plus"
-            size={24}
+          <AntDesign
+            name="pluscircle"
+            size={30}
             style={{ color: styles.headerTint, marginRight: 15 }}
           />
         </TouchableOpacity>
@@ -126,7 +127,7 @@ export default function IndexScreen({ navigation, route }) {
             justifyContent: "space-between",
           }}>
           
-          <Text style={styles.label}>{item.title}</Text>
+          <Text style={[styles.label, styles.text]}>{item.title}</Text>
           <TouchableOpacity
             onPress={() => showAlertHandler(item.id)}
             style={{ paddingTop: 15 }}
@@ -152,7 +153,7 @@ export default function IndexScreen({ navigation, route }) {
             source={{ uri: item.image }}
             style={{ width: 180, height: 250 }}
           />
-          <Text style={styles.label}>{item.title}</Text>
+          <Text style={[styles.label, styles.text]}>{item.title}</Text>
           <TouchableOpacity
             onPress={() => showAlertHandler(item.id)}
             style={{ paddingTop: 15 }}
@@ -204,14 +205,14 @@ export default function IndexScreen({ navigation, route }) {
           <Text style={styles.dialog}>Confirm Delete?</Text>
           <View style={{ flexDirection: "row" }}>
             <TouchableOpacity
-              style={[styles.button]}
+              style={[styles.dialogbutton]}
               onPress={() => deletePost(idRef.current)}
             >
               <Text style={styles.buttonText}>Yes</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={[styles.button]}
+              style={[styles.dialogcancelbutton]}
               onPress={hideAlertHandler}
             >
               <Text style={styles.buttonText}>No</Text>

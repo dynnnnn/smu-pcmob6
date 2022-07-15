@@ -19,13 +19,15 @@ import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import profile from '../assets/profile.png';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { Ionicons } from '@expo/vector-icons'; 
+import { saveUsername } from "../redux/ducks/upload";
+
 
 
 
 
 export default function AccountScreen({ navigation }) {
-  const [username, setUsername] = useState(null);
-  const [expanded, setExpanded] = useState(false);
+  const [username, setUsername] = useState("");
+ 
   
 
   const token = useSelector((state) => state.auth.token);
@@ -65,6 +67,7 @@ export default function AccountScreen({ navigation }) {
       // We should probably go back to the login screen???
     }
   }
+ 
 
   function signOut() {
     dispatch(logOutAction());
@@ -96,6 +99,10 @@ export default function AccountScreen({ navigation }) {
     dispatch(deletePicAction());
   }
 
+
+
+  
+
   useEffect(() => {
     console.log("Setting up nav listener");
     // Check for when we come back to this screen
@@ -108,11 +115,18 @@ export default function AccountScreen({ navigation }) {
     return removeListener;
   }, []);
 
+  useEffect(() => {
+   
+    console.log(username);
+    dispatch({ ...dispatch(saveUsername()), payload: username });
+  
+  }, [username]);
+
   return (
     <View style={[styles.container, { alignItems: "center" }]}>
       <Text style={[styles.title, styles.text, { marginTop: 30 }]}>
         {" "}
-        Hello {username} !
+        Hello, {username}!
       </Text>
       
 <View style={{ height: 320, justifyContent: 'center' }}>

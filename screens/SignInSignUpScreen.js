@@ -96,7 +96,7 @@ export default function SignInSignUpScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
-        {isLogIn ? "Log In" : "Sign up"}
+        {isLogIn ? "Log In" : "Sign Up"}
       </Text>
       <View style={styles.inputView}>
         <TextInput
@@ -133,15 +133,15 @@ export default function SignInSignUpScreen({ navigation }) {
         </View>
       )}
       <View>
-        <View style={{ flexDirection: "row" }}>
+        <View>
           <TouchableOpacity style={styles.button} onPress={ isLogIn ? login : signUp}>
           <TouchableOpacity style={styles.button} onPress={ isLogIn ? login : signUp}></TouchableOpacity>
             <Text style={styles.buttonText}>
-              {isLogIn ? "Log In" : "Sign up"}{" "}
+              {isLogIn ? "Log In" : "Sign Up"}{" "}
             </Text>
           </TouchableOpacity>
           {loading ? (
-            <ActivityIndicator style={{ marginLeft: 10 }} />
+            <ActivityIndicator style={{ marginTop: 30 }} />
           ) : (
             <View />
           )}
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
   inputView: {
     backgroundColor: "#efefef",
     borderRadius: 10,
-    width: "70%",
+    width: 300,
     height: 45,
     marginBottom: 30,
     alignItems: "center",
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "black",
     borderRadius: 10,
-    width: 120,
+    width: 300,
     alignItems: 'center',
     
   },

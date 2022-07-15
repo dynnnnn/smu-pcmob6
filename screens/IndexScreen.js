@@ -169,7 +169,8 @@ export default function IndexScreen({ navigation, route }) {
   return (
     
     <View style={styles.container}>
-    { posts.length === 0 && <Text onPress={addPost} style={styles.label}>No comics! Add some now!</Text>}
+    
+    
      {isList?  
       <FlatList
         data={posts}
@@ -201,7 +202,7 @@ export default function IndexScreen({ navigation, route }) {
         }
       /> }
       {showAlert && (
-        <View style={[styles.greybox]}>
+        <View style={[styles.dialogbox]}>
           <Text style={styles.dialog}>Confirm Delete?</Text>
           <View style={{ flexDirection: "row" }}>
             <TouchableOpacity

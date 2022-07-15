@@ -2,8 +2,8 @@ export const commonStyles = {
   
   button: {
     backgroundColor: '#18dbd8',
-    borderRadius: 10,
-    width: 250,
+    borderRadius: 5,
+    width: 350,
     alignItems: "center",
     margin: 5
   },
@@ -61,6 +61,16 @@ export const commonStyles = {
     width: 100,
     alignItems: "center",
     margin: 10
+  },
+  dialogbox:{ 
+    width: '80%',
+    backgroundColor: '#efefef',
+    alignSelf: 'center',
+    borderRadius: 8,
+    margin: 30,
+    padding: 10,
+    alignItems: 'center'
+  
   },
 }
 

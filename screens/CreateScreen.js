@@ -100,8 +100,10 @@ const additionalStyles = StyleSheet.create({
     backgroundColor: '#ededed',
     marginBottom: 15,
     height: 40,
+    width: 350,
     borderRadius: 5,
-    textAlign: 'center'
+    textAlign: 'center',
+    alignSelf: 'center'
   },
   label: {
     fontSize: 15,
